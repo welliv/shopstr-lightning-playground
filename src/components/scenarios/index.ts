@@ -12,3 +12,5 @@ export { PaymentForwardingScenario } from "./payment-forwarding";
 export { PaymentPrismsScenario } from "./payment-prisms";
 export { LnurlVerifyScenario } from "./lnurl-verify";
 export { WrappedInvoicesScenario } from "./wrapped-invoices";
+export { ZapvertisingScenario } from "./zapvertising";
+export { FrostrScenario } from "./frostr";

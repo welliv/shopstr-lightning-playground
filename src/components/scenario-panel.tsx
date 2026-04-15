@@ -14,6 +14,8 @@ import {
   PaymentPrismsScenario,
   LnurlVerifyScenario,
   WrappedInvoicesScenario,
+  ZapvertisingScenario,
+  FrostrScenario,
 } from "./scenarios";
 import {
   BitcoinConnectButtonScenario,
@@ -54,6 +56,10 @@ export function ScenarioPanel() {
       return <LnurlVerifyScenario />;
     case "wrapped-invoices":
       return <WrappedInvoicesScenario />;
+    case "zapvertising":
+      return <ZapvertisingScenario />;
+    case "frostr":
+      return <FrostrScenario />;
     case "bitcoin-connect-button":
       return <BitcoinConnectButtonScenario />;
     case "connect-wallet":

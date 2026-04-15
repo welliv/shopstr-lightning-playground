@@ -812,6 +812,124 @@ The flow: Enter amount → select currency → see converted value in real time.
       },
     ],
   },
+  // Nostr section
+  {
+    id: "zapvertising",
+    title: "Zapvertising",
+    description:
+      "Boost product listings by zapping sats. Merchants pay for visibility via Lightning — the zap IS the ad.",
+    education:
+      "Zapvertising uses NIP-57 Lightning Zaps to create a permissionless advertising model. A merchant zaps their own listing (or the platform zaps on their behalf) to boost its visibility. The zap creates a kind-9735 receipt on Nostr relays, which ranking algorithms use to surface boosted content. Unlike traditional ads, there's no ad network — direct Lightning payment, instant settlement, pseudonymous.",
+    complexity: "advanced",
+    section: "nostr",
+    requiredWallets: ["alice", "bob", "charlie"],
+    icon: "📢",
+    snippetIds: [
+      "make-invoice",
+      "pay-invoice",
+      "subscribe-notifications",
+    ] satisfies SnippetId[],
+    howItWorks: [
+      {
+        title: "List",
+        description: "Merchant creates a product listing on Shopstr.",
+      },
+      {
+        title: "Boost",
+        description:
+          "Merchant sets a boost budget. Platform creates a zap request (kind 9734) to the listing.",
+      },
+      {
+        title: "Pay",
+        description:
+          "The zap is paid via Lightning. A kind-9735 receipt is published to relays.",
+      },
+      {
+        title: "Rank",
+        description:
+          "Boosted listings appear higher in search results and feeds.",
+      },
+    ],
+    prompts: [
+      {
+        title: "Zapvertising Marketplace",
+        description:
+          "Build a marketplace where merchants boost listings with zaps and boosted items rank higher.",
+        prompt: `Build a Zapvertising-powered marketplace where merchants boost their listings with Lightning zaps.
+
+Requirements:
+- A product listing feed with items showing title, price, and zap count
+- Merchants can select a listing and set a boost budget in sats
+- The boost creates a NIP-57 zap request (kind 9734) to the listing's author
+- Pay the zap invoice via Lightning to complete the boost
+- Publish a zap receipt (kind 9735) to Nostr relays
+- Boosted listings display a "⚡ Boosted" badge
+- Rankings sort boosted items to the top of the feed
+- Show the NIP-57 flow visually: LNURL resolution → zap request → invoice → payment → receipt
+- Use React and TypeScript
+- Write tests using vitest and playwright. Take screenshots and review the screenshots.
+
+The flow: Merchant selects listing → sets boost budget → platform creates zap request → pays via Lightning → receipt published → listing ranks higher.`,      },
+    ],
+  },
+  {
+    id: "frostr",
+    title: "FROSTR Team Signing",
+    description:
+      "Threshold multi-sig for Nostr teams. Split your nsec into shares — no single point of key compromise.",
+    education:
+      "FROSTR (FROst over NostR) uses FROST threshold signatures to split a Nostr private key into k-of-n shares. A 2-of-3 setup means any 2 holders can sign, but 1 alone cannot. Shares can be instantly revoked and rotated without changing the public key (npub). Perfect for marketplace teams where multiple people need to manage a shop without sharing the full key.",
+    complexity: "expert",
+    section: "nostr",
+    requiredWallets: ["alice", "bob", "charlie"],
+    icon: "🔐",
+    snippetIds: ["make-invoice"] satisfies SnippetId[],
+    howItWorks: [
+      {
+        title: "Create",
+        description:
+          "Admin generates a 2-of-3 FROSTR keyset. The npub is the shop identity.",
+      },
+      {
+        title: "Distribute",
+        description:
+          "Three shares created: Admin keeps one, gives one each to Team Member A and B.",
+      },
+      {
+        title: "Sign",
+        description:
+          "When a signature is needed, any 2 of 3 share holders coordinate to produce it.",
+      },
+      {
+        title: "Revoke",
+        description:
+          "If Member B leaves, Admin revokes their share. Signing still works with remaining 2.",
+      },
+    ],
+    prompts: [
+      {
+        title: "Multi-Sig Shop Management",
+        description:
+          "Build a shop management dashboard where a team shares signing authority with FROSTR.",
+        prompt: `Build a team management interface using FROSTR threshold signatures.
+
+Requirements:
+- A dashboard showing the current keyset (threshold, total shares, group ID)
+- Share holder list with status indicators (active/revoked)
+- Button to create a new 2-of-3 FROSTR keyset
+- Visual flow showing share distribution to team members
+- Sign request panel: initiate a signing request for a Nostr event
+- Each share holder can contribute a partial signature
+- When threshold is met, show the combined signature being produced
+- Revocation panel: admin can revoke a team member's share
+- After revocation, show that remaining active shares can still sign
+- Display the final BIP-340 Schnorr signature — indistinguishable from single-sig
+- Use React and TypeScript
+- Write tests using vitest and playwright. Take screenshots and review the screenshots.
+
+The flow: Create keyset → distribute shares → sign request → partial sigs → combined signature → revoke share → still signable with remaining shares.`,      },
+    ],
+  },
   // Bitcoin Connect items
   {
     id: "bitcoin-connect-button",
@@ -883,8 +1001,9 @@ const getComplexityIndex = (complexity: ScenarioComplexity) => {
 
 const getSectionIndex = (section?: ScenarioSection) => {
   if (!section || section === "scenarios") return 0;
-  if (section === "bitcoin-connect") return 1;
-  return 2;
+  if (section === "nostr") return 1;
+  if (section === "bitcoin-connect") return 2;
+  return 3;
 };
 
 export const scenarios = unorderedScenarios.sort((a, b) => {
