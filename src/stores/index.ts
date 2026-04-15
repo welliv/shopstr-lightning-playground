@@ -6,3 +6,4 @@ export { useWrappedInvoiceStore } from './wrapped-invoice-store';
 export { useUIStore } from './ui-store';
 export { useZapvertiseStore } from './zapvertise-store';
 export { useFrostrStore } from './frostr-store';
+export { useL402Store } from './l402-store';

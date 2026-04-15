@@ -7,7 +7,7 @@ import "./index.css";
 import App from "./App.tsx";
 
 init({
-  appName: "Shopstr Lightning Playground",
+  appName: "Shopstr Sandbox",
   showBalance: true,
 });
 

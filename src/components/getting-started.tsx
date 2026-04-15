@@ -6,51 +6,88 @@ import { WALLET_PERSONAS } from "@/types/wallet";
 
 const slides = [
   {
-    title: "How Shopstr Earns",
+    title: "How Shopstr Works",
     content: (
       <div className="flex flex-col items-center gap-6">
-        <span className="text-7xl">🎁</span>
+        <span className="text-7xl">🏪</span>
         <p className="text-center text-lg text-muted-foreground">
-          Shopstr uses <strong>Wrapped Invoices</strong> to collect a small platform fee on every sale.
+          A non-custodial Bitcoin marketplace built on Nostr + Lightning.
         </p>
-        <p className="text-center text-lg text-muted-foreground">
-          When a buyer pays for a product, the platform wraps the seller's invoice with a higher amount.
-          The fee difference is earned — completely non-custodially.
-        </p>
-        <p className="text-center text-sm text-muted-foreground">
-          Buyers pay the platform. Platform pays the seller. Preimage settles the chain. Done.
-        </p>
+        <div className="grid grid-cols-1 gap-2 text-sm text-muted-foreground max-w-md">
+          <div className="flex items-center gap-3">
+            <span>📦</span><span>Seller lists product on Nostr relays (NIP-23)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>🔍</span><span>Buyer discovers listing via marketplace feed</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>✅</span><span>Verify seller identity (NIP-05)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>💸</span><span>Buyer pays via Lightning (NWC) or Cashu (eCash)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>🎁</span><span>Order gift-wrapped to seller (NIP-59 + NIP-44)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>🔔</span><span>Seller gets instant notification (NWC push)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>📦</span><span>Seller ships product to buyer</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>✅</span><span>Buyer confirms delivery, funds released</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>⭐</span><span>Buyer leaves review (Nostr event)</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>📢</span><span>Merchant boosts listing via Zapvertising</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span>🔐</span><span>AI agents call MCP API (L402 payments)</span>
+          </div>
+        </div>
       </div>
     ),
   },
   {
-    title: "The Lightning Marketplace Stack",
+    title: "How Shopstr Earns",
     content: (
       <div className="flex flex-col items-center gap-6">
-        <div className="flex items-center gap-8 text-5xl">
-          <div className="flex flex-col items-center gap-2">
-            <span>🔗</span>
-            <span className="text-sm font-medium text-muted-foreground">NWC</span>
+        <span className="text-7xl">💰</span>
+        <p className="text-center text-lg text-muted-foreground">
+          Three Bitcoin-native revenue streams. No Stripe. No fiat billing.
+        </p>
+        <div className="flex flex-col gap-4 text-sm max-w-md">
+          <div className="flex items-start gap-4 p-3 rounded-lg bg-muted/50">
+            <span className="text-2xl">🎁</span>
+            <div>
+              <p className="font-medium">Transaction Fee (1%)</p>
+              <p className="text-muted-foreground">
+                Wrapped invoices collect 1% on every sale. Non-custodial: funds locked in Lightning network, never in Shopstr's wallet.
+              </p>
+            </div>
           </div>
-          <div className="text-2xl text-muted-foreground">+</div>
-          <div className="flex flex-col items-center gap-2">
-            <span>🔌</span>
-            <span className="text-sm font-medium text-muted-foreground">LNURL</span>
+          <div className="flex items-start gap-4 p-3 rounded-lg bg-muted/50">
+            <span className="text-2xl">🔐</span>
+            <div>
+              <p className="font-medium">API Fee (L402)</p>
+              <p className="text-muted-foreground">
+                AI agents pay per API call via L402. Product lookup: 5 sats. Order creation: 10 sats. Payment verification: 1 sat.
+              </p>
+            </div>
           </div>
-          <div className="text-2xl text-muted-foreground">+</div>
-          <div className="flex flex-col items-center gap-2">
-            <span>🔒</span>
-            <span className="text-sm font-medium text-muted-foreground">Hold Invoices</span>
+          <div className="flex items-start gap-4 p-3 rounded-lg bg-muted/50">
+            <span className="text-2xl">📢</span>
+            <div>
+              <p className="font-medium">Boost Fee (5%)</p>
+              <p className="text-muted-foreground">
+                Merchants zap listings for visibility. Shopstr takes 5% of boost revenue. The zap IS the ad.
+              </p>
+            </div>
           </div>
         </div>
-        <p className="text-center text-lg text-muted-foreground">
-          NWC connects wallets to the marketplace.
-          LNURL makes seller payouts instant.
-          Hold Invoices protect buyers with escrow.
-        </p>
-        <p className="text-center text-lg text-muted-foreground">
-          Together, these three protocols power a fully decentralized, non-custodial marketplace.
-        </p>
       </div>
     ),
   },
@@ -71,16 +108,12 @@ const slides = [
             <span>{WALLET_PERSONAS.charlie.emoji}</span>
             <span className="text-lg font-medium text-foreground">{WALLET_PERSONAS.charlie.name}</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <span>{WALLET_PERSONAS.david.emoji}</span>
-            <span className="text-lg font-medium text-foreground">{WALLET_PERSONAS.david.name}</span>
-          </div>
         </div>
         <p className="text-center text-lg text-muted-foreground">
-          Connect test wallets to explore each Lightning scenario as it maps to Shopstr's marketplace.
+          Connect test wallets, pick a scenario, and click through each step.
         </p>
         <p className="text-center text-sm text-muted-foreground">
-          Each scenario shows how Lightning primitives power real marketplace features.
+          Each scenario maps to a real Shopstr marketplace feature.
         </p>
       </div>
     ),
@@ -108,7 +141,7 @@ export function GettingStarted() {
           {isLastSlide ? (
             <Button asChild>
               <Link to={`/${scenarios[0].id}`}>
-                Try the first scenario &rarr;
+                Try Marketplace Checkout &rarr;
               </Link>
             </Button>
           ) : (

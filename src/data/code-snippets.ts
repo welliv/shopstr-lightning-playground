@@ -60,7 +60,8 @@ export type SnippetId =
   | "bc-launch-modal"
   | "bc-disconnect"
   | "bc-pay-button"
-  | "bc-launch-payment-modal";
+  | "bc-launch-payment-modal"
+  | "fetch-with-l402";
 
 export type CodeLanguage = "javascript" | "typescript" | "bash";
 
@@ -614,6 +615,26 @@ console.log('Wrapped invoice:', response.invoice)
 // This is non-custodial: you never hold the payer's funds.
 // They remain locked in the network until you settle.`,
     category: "advanced",
+  },
+
+  // L402
+  {
+    id: "fetch-with-l402",
+    title: "Fetch with L402",
+    description:
+      "Automatically pay for HTTP resources using the L402 protocol. The fetch402 helper detects 402 responses, pays the invoice, and retries with proof of payment.",
+    category: "advanced",
+    code: `import { fetch402 } from '@getalby/lightning-tools/402'
+
+// One call handles everything: detect 402 → pay → retry → get data
+const response = await fetch402(
+  'https://shopstr.app/api/mcp/products',
+  { nwcUrl: 'nostr+walletconnect://...' }
+)
+const products = await response.json()
+
+// Server side: wrap any endpoint with L402 pricing
+// app.get('/api/mcp/products', l402({ amount: 5 }), handler)`,
   },
 
   // Bitcoin Connect
